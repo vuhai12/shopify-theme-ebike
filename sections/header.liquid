@@ -1,9 +1,9 @@
-<header>
-  <h2 class="header__title">
-    {{ shop.name | link_to: routes.root_url }}
+<header class="bg-slate-600">
+  <h2 class="text-black font-semibold">
+    {{ "KENZAP" | link_to: routes.root_url }}
   </h2>
 
-  <div class="header__menu">
+  <div class="">
     {% for link in section.settings.menu.links %}
       {{ link.title | link_to: link.url }}
     {% endfor %}

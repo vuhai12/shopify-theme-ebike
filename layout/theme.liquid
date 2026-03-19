@@ -24,7 +24,9 @@
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
+  <link rel="stylesheet" href="{{ 'main-built.css' | asset_url }}">
   </head>
+  
 
   <body>
     {% sections 'header-group' %}

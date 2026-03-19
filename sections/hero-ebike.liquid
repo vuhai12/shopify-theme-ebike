@@ -1,0 +1,64 @@
+<section class="relative bg-slate-950 py-24 overflow-hidden min-h-[600px] flex items-center">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] -mr-40 -mt-40"></div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <div class="md:w-1/2 text-left">
+        <h2 class="text-cyan-400 font-bold tracking-[0.3em] uppercase mb-4 text-sm font-sans">Thế hệ mới 2026</h2>
+        <h1 class="text-6xl md:text-8xl font-black text-white leading-none mb-6 font-sans">
+         {{ section.settings.heading }} <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">EVOLVED</span>
+        </h1>
+        <p class="text-slate-400 text-lg mb-10 max-w-md leading-relaxed font-sans">
+          {{ section.settings.subtext }}
+        </p>
+        <div class="flex gap-6">
+          <button class="bg-cyan-500 hover:bg-white text-black font-extrabold py-4 px-10 rounded-none transition-all duration-300">
+           {{ section.settings.button_label }}
+          </button>
+        </div>
+      </div>
+
+      <div class="md:w-1/2 relative group">
+      <img 
+    src="https://images.unsplash.com/photo-1593504049359-74330189a355?auto=format&fit=crop&q=80&w=800" 
+    alt="E-bike" 
+    class="relative z-10 w-full h-auto transform rotate-[-5deg] group-hover:rotate-0 transition-all duration-500 drop-shadow-[0_0_30px_rgba(6,182,212,0.5)]"
+    loading="lazy"
+    width="800"
+    height="500"
+  >
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Ebike",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Tiêu đề chính",
+      "default": "SPEED EVOLVED"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Mô tả ngắn",
+      "default": "Định nghĩa lại trải nghiệm di chuyển đô thị với động cơ siêu bền."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Chữ trên nút",
+      "default": "ĐẶT HÀNG NGAY"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Ebike"
+    }
+  ]
+}
+{% endschema %}
