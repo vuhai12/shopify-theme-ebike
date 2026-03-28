@@ -1,0 +1,143 @@
+<section class="container py-16 px-6">
+  <!-- Heading -->
+  <div class="text-center mb-12">
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+      {{ section.settings.title }}
+    </h2>
+
+    <p class="text-gray-600">
+      {{ section.settings.description }}
+    </p>
+  </div>
+
+  <!-- Features grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8 ">
+    {% if section.blocks.size == 0 %}
+      <!-- Default fallback features -->
+
+      {% assign features = 'No-code customization|
+      Lightning-fast performance|
+      Fully responsive mobile-first layout|
+      SEO optimized structure|
+      Conversion-focused product pages|
+      Flexible homepage sections|
+      App-friendly architecture|
+      Built-in marketing sections|
+      Multiple layout variations|
+      Newsletter integration ready|
+      Smart navigation support|
+      Dedicated support & updates'
+        | split: '|'
+      %}
+      {% for feature in features %}
+        <div class="flex items-start gap-3">
+          <!-- check icon -->
+          <div class="flex items-center justify-center w-10 h-10 rounded-[50%] bg-purple-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 text-purple-600 mt-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          <p class="text-gray-700">
+            {{ feature }}
+          </p>
+        </div>
+      {% endfor %}
+
+    {% else %}
+      {% for block in section.blocks %}
+        <div class="flex items-start gap-3">
+          <!-- icon -->
+          <div class="flex items-center justify-center w-10 h-10 rounded-[50%] bg-purple-200">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-6 h-6 text-purple-600 mt-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+
+          <p class="text-gray-700">
+            {{ block.settings.text }}
+          </p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Theme features checklist",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Everything You Need to Launch Your Store Faster"
+    },
+
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section description",
+      "default": "Create a professional Shopify store quickly with flexible, high-performance themes designed for speed and conversions."
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature text"
+        }
+      ]
+    }
+  ],
+
+  "max_blocks": 12,
+
+  "presets": [
+    {
+      "name": "Theme features checklist",
+      "blocks": [
+        { "type": "feature", "settings": { "text": "No-code customization" } },
+        { "type": "feature", "settings": { "text": "Lightning-fast performance" } },
+        { "type": "feature", "settings": { "text": "Mobile-first responsive layout" } },
+        { "type": "feature", "settings": { "text": "SEO optimized structure" } },
+        { "type": "feature", "settings": { "text": "Flexible homepage sections" } },
+        { "type": "feature", "settings": { "text": "Conversion-focused product pages" } },
+        { "type": "feature", "settings": { "text": "Smart navigation support" } },
+        { "type": "feature", "settings": { "text": "App-friendly architecture" } },
+        { "type": "feature", "settings": { "text": "Multiple layout variations" } },
+        { "type": "feature", "settings": { "text": "Built-in marketing sections" } },
+        { "type": "feature", "settings": { "text": "Newsletter integration ready" } },
+        { "type": "feature", "settings": { "text": "Dedicated support & updates" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

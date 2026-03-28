@@ -1,56 +1,131 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
-
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
-
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
+<section class="pt-[50px] pb-[30px] bg-gray-100">
+  <div class="container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14 pb-[50px]">
+    {% if section.blocks.size == 0 %}
+      <div class="flex flex-col gap-5">
+        <h3 class="font-semibold text-[30px]">KENZAP</h3>
+        <P>{{ section.settings.description }}</P>
+      </div>
+      <div class="flex flex-col gap-5">
+        <h3 class="font-semibold">Product</h3>
+        <div class="flex flex-col gap-3">
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Features</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Pricing</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Roadmap</a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
+        <h3 class="font-semibold">Company</h3>
+        <div class="flex flex-col gap-3">
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">About Us</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Careers</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Contact</a>
+        </div>
+      </div>
+      <div class="flex flex-col gap-5">
+        <h3 class="font-semibold">Follow Us</h3>
+        <div class="flex flex-col gap-3">
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Facebook</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Twitter</a>
+          <a href="#" class="text-sm text-gray-600 hover:text-blue-500">Instagram</a>
+        </div>
+      </div>
+    {% else %}
+      {% for block in section.blocks %}
+        {% if block.type == 'column-logo' %}
+          <div class="flex flex-col">
+            {% if block.settings.logo %}
+              <img
+                width=""
+                height=""
+                src="{{ block.settings.logo | image_url }}"
+                alt="logo"
+                class="mb-4 w-32 h-auto"
+              >
+            {% endif %}
+            <p class="text-gray-600">{{ block.settings.des }}</p>
+          </div>
+        {% elsif block.type == 'title' %}
+          <div class="flex flex-col">
+            <h3 class="text-lg font-semibold mb-2">{{ block.settings.title }}</h3>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-sm text-gray-600 hover:text-blue-500"> {{ block.settings.link1 }} </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-gray-600 hover:text-blue-500"> {{ block.settings.link2 }} </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-gray-600 hover:text-blue-500"> {{ block.settings.link3 }} </a>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
       {% endfor %}
     {% endif %}
   </div>
-</footer>
-
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
-    color: var(--color-foreground);
-  }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
-  }
-{% endstylesheet %}
+  <div class="border-t-[1px] border-gray-300 pt-[30px]">
+    <p class="text-center text-gray-600 mt-8">
+      {{ section.settings['bottom-heading'] }}
+    </p>
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "t:general.footer",
+  "name": "Footer",
+  "max_blocks": 4,
   "settings": [
     {
-      "type": "link_list",
-      "id": "menu",
-      "label": "t:labels.menu"
+      "label": "bottom-heading",
+      "type": "text",
+      "id": "bottom-heading",
+      "default": "© 2024 Your Company. All rights reserved."
     },
     {
-      "type": "checkbox",
-      "id": "show_payment_icons",
-      "label": "t:labels.show_payment_icons",
-      "default": true
+      "type": "text",
+      "default": "Create and sell stunning Shopify themes built with modern technologies like Liquid, TailwindCSS, and Vite.",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "column-logo",
+      "type": "column-logo",
+      "settings": [
+        { "type": "image_picker", "id": "logo", "label": "logo" },
+        {
+          "type": "text",
+          "id": "des",
+          "label": "des",
+          "default": "Create and sell stunning Shopify themes built with modern technologies like Liquid, TailwindCSS, and Vite."
+        }
+      ]
+    },
+    {
+      "name": "comlumn-title",
+      "type": "title",
+      "settings": [
+        { "type": "text", "id": "title", "label": "title" },
+        { "type": "text", "id": "link1", "label": "link1" },
+        { "type": "text", "id": "link2", "label": "link2" },
+        { "type": "text", "id": "link3", "label": "link3" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "footer",
+      "blocks": [
+        {
+          "type": "column-logo",
+          "settings": {
+            "logo": "",
+            "des": ""
+          }
+        },
+        { "type": "title", "settings": { "title": "x", "link1": "", "link2": "", "link3": "" } }
+      ]
     }
   ]
 }

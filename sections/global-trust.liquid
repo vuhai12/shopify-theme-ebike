@@ -1,0 +1,114 @@
+<section class="bg-gray-50 py-16">
+  <div class="container mx-auto px-6 text-center max-w-3xl">
+    <!-- title -->
+    <h2 class="text-3xl md:text-4xl font-bold mb-4">
+      {{ section.settings.title }}
+    </h2>
+
+    <!-- description -->
+    <p class="text-gray-600 mb-12">
+      {{ section.settings.description }}
+    </p>
+  </div>
+
+  <!-- stats -->
+  <div class="container mx-auto px-6 grid md:grid-cols-4 gap-10 text-center mt-10">
+    {% if section.blocks.size == 0 %}
+      <!-- fallback default stats -->
+
+      {% assign stats = '5000+|Stores Built|
+      12000+|Theme Downloads|
+      40+|Countries|
+      24/7|Support Available'
+        | split: '|'
+      %}
+
+      {% for stat in stats %}
+        {% assign index = forloop.index0 | modulo: 2 %}
+
+        {% if index == 0 %}
+          <div>
+            <div class="text-4xl font-bold text-purple-600">
+              {{ stat }}
+            </div>
+        {% else %}
+          <p class="text-gray-600 mt-2">
+            {{ stat }}
+          </p>
+
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    {% else %}
+      {% for block in section.blocks %}
+        <div>
+          <div class="text-4xl font-bold text-purple-600">
+            {{ block.settings.number }}
+          </div>
+
+          <p class="text-gray-600 mt-2">
+            {{ block.settings.label }}
+          </p>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Global trust stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Trusted by Store Owners Worldwide"
+    },
+
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section description",
+      "default": "Thousands of merchants use our Shopify themes to launch faster, sell better, and grow their online businesses."
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "5000+"
+        },
+
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Stores Built"
+        }
+      ]
+    }
+  ],
+
+  "max_blocks": 4,
+
+  "presets": [
+    {
+      "name": "Global trust stats",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "5000+", "label": "Stores Built" } },
+        { "type": "stat", "settings": { "number": "12000+", "label": "Theme Downloads" } },
+        { "type": "stat", "settings": { "number": "40+", "label": "Countries" } },
+        { "type": "stat", "settings": { "number": "24/7", "label": "Support Available" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

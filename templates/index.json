@@ -1,9 +1,41 @@
 {
   "sections": {
-    "trang_chu_ebike": {
+    "hero-ebike": {
       "type": "hero-ebike",
+      "settings": {}
+    },
+    "trusted-by": {
+      "type": "trusted-by",
+      "settings": {}
+    },
+    "how-it-works": {
+      "type": "how-it-works",
+      "settings": {}
+    },
+    "features-checklist": {
+      "type": "features-checklist",
+      "settings": {}
+    },
+    "global-trust": {
+      "type": "global-trust",
+      "settings": {}
+    },
+    "contact-section": {
+      "type": "contact-section",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
       "settings": {}
     }
   },
-  "order": ["trang_chu_ebike"]
+  "order": [
+    "hero-ebike",
+    "trusted-by",
+    "how-it-works",
+    "features-checklist",
+    "global-trust",
+    "testimonials",
+    "contact-section"
+  ]
 }

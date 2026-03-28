@@ -24,15 +24,21 @@
     {% render 'meta-tags' %}
 
     {{ content_for_header }}
-  <link rel="stylesheet" href="{{ 'main-built.css' | asset_url }}">
+    <link rel="stylesheet" href="{{ 'main-built.css' | asset_url }}">
   </head>
-  
-
   <body>
-    {% sections 'header-group' %}
+    <div class="relative w-full ">
+      <div class="absolute top-0 z-50 w-full ">
+        {% sections 'header-group' %}
+      </div>
 
-    {{ content_for_layout }}
+      {{ content_for_layout }}
+    </div>
 
     {% sections 'footer-group' %}
+
+    {% render 'button-to-top' %}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
   </body>
 </html>

@@ -1,0 +1,61 @@
+<section class="container mx-auto py-12">
+  <h2 class="text-3xl font-bold text-center mb-14">Trusted by Thousands of Customers</h2>
+
+  {% assign default_logos = 'logo1.png,logo2.png,logo3.png,logo4.png,logo5.png,logo6.png' | split: ',' %}
+
+  <div class="flex gap-[100px] flex-wrap w-full items-center justify-center mt-[50px]">
+    {% if section.blocks.size == 0 %}
+      {% for logo in default_logos %}
+        <img
+          width=""
+          height=""
+          src="{{ logo | asset_url }}"
+          class="object-contain"
+          alt="default logo"
+        >
+      {% endfor %}
+
+    {% else %}
+      {% for block in section.blocks %}
+        <img
+          width=""
+          height=""
+          src="
+            {% if block.settings.logo %}
+              {{ block.settings.logo | image_url }}
+            {% else %}
+              {{ default_logos[forloop.index0] | asset_url }}
+            {% endif %}
+          "
+          class="w-20"
+          alt="logo"
+        >
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trusted By",
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Upload logo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trusted By",
+      "blocks": [{ "type": "logo" }, { "type": "logo" }, { "type": "logo" }, { "type": "logo" }]
+    }
+  ]
+}
+{% endschema %}

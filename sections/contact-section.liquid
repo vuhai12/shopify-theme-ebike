@@ -1,0 +1,134 @@
+<section class="bg-gray-50 py-16">
+  <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12">
+    <!-- Left content -->
+
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">
+        {{ section.settings.title }}
+      </h2>
+
+      <p class="text-gray-600 mb-8">
+        {{ section.settings.description }}
+      </p>
+
+      <!-- contact info -->
+
+      <div class="space-y-4 text-gray-700">
+        {% if section.settings.email != blank %}
+          <p>📧 {{ section.settings.email }}</p>
+        {% endif %}
+
+        {% if section.settings.phone != blank %}
+          <p>📞 {{ section.settings.phone }}</p>
+        {% endif %}
+
+        {% if section.settings.address != blank %}
+          <p>📍 {{ section.settings.address }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Contact form -->
+
+    <div class="bg-white p-8 rounded-xl shadow-sm">
+      {% form 'contact' %}
+        {% if form.posted_successfully? %}
+          <p class="text-green-600 font-medium">Message sent successfully!</p>
+        {% endif %}
+
+        {% if form.errors %}
+          <p class="text-red-600">
+            {{ form.errors | default_errors }}
+          </p>
+        {% endif %}
+
+        <!-- name -->
+
+        <input
+          type="text"
+          name="contact[name]"
+          placeholder="Your name"
+          class="w-full border rounded-lg px-4 py-3 mb-4"
+          required
+        >
+
+        <!-- email -->
+
+        <input
+          type="email"
+          name="contact[email]"
+          placeholder="Email address"
+          class="w-full border rounded-lg px-4 py-3 mb-4"
+          required
+        >
+
+        <!-- message -->
+
+        <textarea
+          name="contact[body]"
+          rows="5"
+          placeholder="Your message"
+          class="w-full border rounded-lg px-4 py-3 mb-4"
+          required
+        ></textarea>
+
+        <!-- button -->
+
+        <button
+          type="submit"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition"
+        >
+          Send Message
+        </button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Contact Us"
+    },
+
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section description",
+      "default": "Have questions about our Shopify themes? Send us a message and we'll get back to you shortly."
+    },
+
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "support@yourstore.com"
+    },
+
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+1 234 567 890"
+    },
+
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Address",
+      "default": "Your business address"
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Contact section"
+    }
+  ]
+}
+{% endschema %}

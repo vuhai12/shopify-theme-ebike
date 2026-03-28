@@ -1,0 +1,53 @@
+<div
+  id="mobile-sidebar"
+  class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm md:hidden hidden transition-opacity duration-300"
+>
+  <div
+    id="sidebar-menu"
+    class="
+      fixed top-0 left-0 bottom-0
+      w-[300px]
+      bg-white
+      shadow-2xl
+      flex flex-col
+      transform -translate-x-full
+      transition-transform duration-300 ease-in-out
+    "
+  >
+    <!-- Header -->
+    <div class="flex items-center justify-between px-5 h-[64px] border-b">
+      <h2 class="text-xl font-semibold tracking-wide text-black">
+        {{ 'KENZAP' | link_to: routes.root_url }}
+      </h2>
+
+      <button
+        id="close-sidebar"
+        class="text-gray-500 hover:text-black text-xl transition"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Menu -->
+    <nav class="flex flex-col mt-2">
+      {% for link in menu.links %}
+        <a
+          href="{{ link.url }}"
+          class="
+            px-6 py-4
+            text-lg
+            text-gray-700
+            hover:bg-gray-100
+            hover:text-black
+            transition
+          "
+        >
+          {{ link.title }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <!-- Footer optional -->
+    <div class="mt-auto p-5 border-t text-sm text-gray-400">© {{ 'now' | date: '%Y' }} KENZAP</div>
+  </div>
+</div>
